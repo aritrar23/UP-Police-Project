@@ -77,7 +77,7 @@ if 'retriever' not in st.session_state:
         model_name='mixtral-8x7b-32768'  # Chat-specific LLM
     )
 
-    documents = SimpleDirectoryReader(input_dir='/kaggle/input/corrected-english-circulars').load_data()
+    documents = SimpleDirectoryReader(input_dir='corrected-english-circulars').load_data()
     docs = []
     for idx, doc in enumerate(documents):
         doc.metadata["index_id"] = str(doc.id_)
