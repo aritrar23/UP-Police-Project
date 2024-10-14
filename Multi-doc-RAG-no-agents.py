@@ -62,7 +62,7 @@ if 'retriever' not in st.session_state:
     pc = Pinecone(api_key=api_key)
 
     # Load the pre-generated summaries from the pickle file
-    with open('/kaggle/input/doc-summaries/doc_summaries.pkl', 'rb') as file:
+    with open('doc_summaries.pkl', 'rb') as file:
         doc_summaries = pickle.load(file)
 
     # Create and configure the general Groq LLM (Groq)
@@ -225,7 +225,7 @@ if input := st.chat_input():
                 # Use unique-doc-names in RAG Chain
                 text = ""
                 for doc_name in doc_names_unique:
-                    file_path = r"/kaggle/input/corrected-english-circulars"
+                    file_path = r"corrected-english-circulars"
                     with open(f"{file_path}/{doc_name}", 'r', encoding='utf-8') as f:
                         text += f.read()
 
@@ -233,13 +233,13 @@ if input := st.chat_input():
                 with open(text_file_path, "w", encoding="utf-8") as text_file:
                     text_file.write(text)
 
-                loader = TextLoader('/kaggle/working/Dynamic.txt')
+                loader = TextLoader('Dynamic.txt')
                 the_text = loader.load()
                 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
                 chunks = text_splitter.split_documents(the_text)
                 
                 # Clear out the existing database directory if it exists
-                chroma_persist_directory = "/kaggle/working/chroma_db_2"
+                chroma_persist_directory = "chroma_db_2"
                 if os.path.exists(chroma_persist_directory):
                     shutil.rmtree(chroma_persist_directory)
 
