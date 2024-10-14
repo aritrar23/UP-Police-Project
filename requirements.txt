@@ -14,3 +14,4 @@ sentence-transformers
 langchain-huggingface
 llama-hub
 nest-asyncio
+pysqlite3>=3.35.0
