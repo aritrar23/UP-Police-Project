@@ -1,0 +1,17 @@
+llama-index>=0.9.31 
+scikit-learn==1.2.2
+pinecone-client>=3.0.0
+chromadb
+langchain-chroma
+groq 
+langchain 
+langchain-core 
+langchain-groq 
+pypdf
+llama-index-llms-groq
+llama-index-vector-stores-pinecone
+llama-index-embeddings-langchain
+langchain-community
+sentence-transformers
+langchain-huggingface
+llama-hub
