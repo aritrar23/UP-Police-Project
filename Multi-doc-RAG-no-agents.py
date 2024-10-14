@@ -30,7 +30,6 @@ from llama_index.core.retrievers import VectorIndexAutoRetriever
 from pinecone import Pinecone
 from pinecone import ServerlessSpec
 import shutil
-import chromadb
 
 
 # Initialize nest_asyncio to allow async operations in Streamlit
