@@ -5,12 +5,15 @@ pinecone-client>=3.0.0
 langchain-chroma
 chromadb
 groq 
+protobuf
+opentelemetry-exporter-otlp
 langchain 
 langchain-core 
 langchain-groq 
 pypdf
 llama-index-llms-groq
 llama-index-vector-stores-pinecone
+llama-index-vector-stores-chroma
 llama-index-embeddings-langchain
 langchain-community
 sentence-transformers
