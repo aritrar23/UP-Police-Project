@@ -26,5 +26,8 @@
   },
   "forwardPorts": [
     8501
-  ]
+  ],
+  "remoteEnv": {
+    "PYTHONUNBUFFERED": "1"  // Ensures real-time logging
+  }
 }
