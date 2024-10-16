@@ -94,8 +94,8 @@ if 'retriever' not in st.session_state:
     )
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
-    doc_index = VectorStoreIndex.from_documents(
-        docs, storage_context=storage_context
+    doc_index = VectorStoreIndex.from_vector_store(
+        vector_store=vector_store, storage_context=storage_context
     )
 
     async def aprocess_doc(doc, summary_txt, include_summary: bool = True):
@@ -144,8 +144,8 @@ if 'retriever' not in st.session_state:
         namespace="test2",
     )
     storage_context_auto = StorageContext.from_defaults(vector_store=vector_store_auto)
-    index = VectorStoreIndex(
-        objects=index_nodes, storage_context=storage_context_auto
+    index = VectorStoreIndex.from_vector_store(
+        vector_store=vector_store_auto, storage_context=storage_context_auto
     )
 
     vector_store_info = VectorStoreInfo(
