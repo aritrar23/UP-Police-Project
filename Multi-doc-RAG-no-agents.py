@@ -1,6 +1,6 @@
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+# __import__('pysqlite3')
+# import sys
+# sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
 import nest_asyncio
 import os
@@ -94,8 +94,8 @@ if 'retriever' not in st.session_state:
     )
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
-    doc_index = VectorStoreIndex.from_documents(
-        docs, storage_context=storage_context
+    doc_index = VectorStoreIndex.from_vector_store(
+        vector_store=vector_store, storage_context=storage_context
     )
 
     async def aprocess_doc(doc, summary_txt, include_summary: bool = True):
