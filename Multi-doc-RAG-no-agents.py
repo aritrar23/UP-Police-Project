@@ -144,8 +144,8 @@ if 'retriever' not in st.session_state:
         namespace="test2",
     )
     storage_context_auto = StorageContext.from_defaults(vector_store=vector_store_auto)
-    index = VectorStoreIndex(
-        objects=index_nodes, storage_context=storage_context_auto
+    index = VectorStoreIndex.from_vector_store(
+        vector_store=vector_store_auto, storage_context=storage_context_auto
     )
 
     vector_store_info = VectorStoreInfo(
