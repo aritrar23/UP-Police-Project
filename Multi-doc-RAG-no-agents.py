@@ -81,56 +81,56 @@ if 'retriever' not in st.session_state:
     #     doc.metadata["index_id"] = str(doc.id_)
     #     docs.append(doc)
 
-    pinecone_index = pc.Index("english-circulars")
-    vector_store = PineconeVectorStore(
-        pinecone_index=pinecone_index,
-        namespace="test",
-    )
-    storage_context = StorageContext.from_defaults(vector_store=vector_store)
+    # pinecone_index = pc.Index("english-circulars")
+    # vector_store = PineconeVectorStore(
+    #     pinecone_index=pinecone_index,
+    #     namespace="test",
+    # )
+    # storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
-    doc_index = VectorStoreIndex.from_vector_store(
-        vector_store=vector_store, storage_context=storage_context
-    )
+    # doc_index = VectorStoreIndex.from_vector_store(
+    #     vector_store=vector_store, storage_context=storage_context
+    # )
 
-    async def aprocess_doc(doc, summary_txt, include_summary: bool = True):
-        """Process doc using pre-generated summaries."""
-        metadata = doc.metadata
+    # async def aprocess_doc(doc, summary_txt, include_summary: bool = True):
+    #     """Process doc using pre-generated summaries."""
+    #     metadata = doc.metadata
         
-        # No need for ID checks; use the summary directly
-        filters = MetadataFilters(
-            filters=[
-                MetadataFilter(
-                    key="index_id", operator=FilterOperator.EQ, value=str(doc.metadata["index_id"])
-                ),
-            ]
-        )
+    #     # No need for ID checks; use the summary directly
+    #     filters = MetadataFilters(
+    #         filters=[
+    #             MetadataFilter(
+    #                 key="index_id", operator=FilterOperator.EQ, value=str(doc.metadata["index_id"])
+    #             ),
+    #         ]
+    #     )
 
-        # Create an index node using the summary text and metadata
-        index_node = IndexNode(
-            text=summary_txt,
-            metadata=metadata,
-            obj=doc_index.as_retriever(filters=filters),
-            index_id=doc.id_,
-        )
+    #     # Create an index node using the summary text and metadata
+    #     index_node = IndexNode(
+    #         text=summary_txt,
+    #         metadata=metadata,
+    #         obj=doc_index.as_retriever(filters=filters),
+    #         index_id=doc.id_,
+    #     )
 
-        return index_node
+    #     return index_node
 
-    async def process_docs(docs, doc_summaries):
-        """Process metadata on docs using pre-generated summaries."""
-        tasks = []
-        for i, doc in enumerate(docs):
-            summary_txt = doc_summaries[i]
-            task = aprocess_doc(doc, summary_txt)
-            tasks.append(task)
+    # async def process_docs(docs, doc_summaries):
+    #     """Process metadata on docs using pre-generated summaries."""
+    #     tasks = []
+    #     for i, doc in enumerate(docs):
+    #         summary_txt = doc_summaries[i]
+    #         task = aprocess_doc(doc, summary_txt)
+    #         tasks.append(task)
 
-        index_nodes = await asyncio.gather(*tasks)
-        return index_nodes
+    #     index_nodes = await asyncio.gather(*tasks)
+    #     return index_nodes
 
-    def run_async_function():
-        index_nodes = asyncio.run(process_docs(docs, doc_summaries))
-        return index_nodes
+    # def run_async_function():
+    #     index_nodes = asyncio.run(process_docs(docs, doc_summaries))
+    #     return index_nodes
 
-    index_nodes = run_async_function()
+    # index_nodes = run_async_function()
 
     pinecone_index_metadata = pc.Index("english-circulars-metadata")
     vector_store_auto = PineconeVectorStore(
