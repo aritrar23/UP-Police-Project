@@ -33,6 +33,7 @@ from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core.retrievers import VectorIndexAutoRetriever
 from pinecone import Pinecone
 from pinecone import ServerlessSpec
+from deep_translator import GoogleTranslator
 import shutil
 
 
@@ -47,6 +48,9 @@ Settings.embed_model = embed_model
 st.set_page_config(page_title="UP Police Circulars Q&A Bot")
 with st.sidebar:
     st.title('UP Police Circulars Q&A Bot')
+
+# Display buttons for language selection
+language = st.sidebar.radio("Select Language:", ("English", "Hindi"))
 
 # Store LLM generated responses
 if "messages" not in st.session_state:
@@ -282,7 +286,10 @@ if input := st.chat_input():
                 )
 
                 response = rag_chain.invoke(user_query)
-
+                if language == "Hindi":
+                    translator = GoogleTranslator(source='auto', target='hi')
+                    response = translator.translate(response)
+                
                 st.write(response)
                 st.session_state.messages.append({"role": "assistant", "content": response})
                 chromadb.api.client.SharedSystemClient.clear_system_cache()

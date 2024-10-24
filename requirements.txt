@@ -1,5 +1,6 @@
 pysqlite3-binary
 streamlit==1.39.0
+deep_translator
 llama-index>=0.9.31 
 pinecone-client>=3.0.0
 langchain-chroma
